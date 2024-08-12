@@ -14,10 +14,9 @@ public class BinarySearchTree {
     private List<Integer> inputNumbers;
 
     @Lob
-    private String treeStructure; // Store the tree as a JSON string
+    private String treeStructure;
 
     // Getters and Setters
-
     public List<Integer> getInputNumbers() {
         return inputNumbers;
     }

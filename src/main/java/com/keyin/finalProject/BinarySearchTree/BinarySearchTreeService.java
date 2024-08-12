@@ -18,7 +18,7 @@ public class BinarySearchTreeService {
         for (Integer number : numbers) {
             root = insert(root, number);
         }
-        return root; // Return the tree structure as a TreeNode object
+        return root;
     }
 
     private TreeNode insert(TreeNode root, int value) {
