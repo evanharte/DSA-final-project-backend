@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class BinarySearchTreeController {
 
     private final BinarySearchTreeService service;
@@ -19,5 +19,11 @@ public class BinarySearchTreeController {
     public ResponseEntity<?> createTree(@RequestBody List<Integer> numbers) {
         TreeNode tree = service.createTree(numbers);
         return ResponseEntity.ok(tree);
+    }
+
+    @GetMapping("/previous-trees")
+    public ResponseEntity<List<BinarySearchTree>> getPreviousTrees() {
+        List<BinarySearchTree> trees = service.getAllTrees();
+        return ResponseEntity.ok(trees);
     }
 }

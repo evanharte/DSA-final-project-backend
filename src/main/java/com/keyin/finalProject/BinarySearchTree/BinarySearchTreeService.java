@@ -1,5 +1,7 @@
 package com.keyin.finalProject.BinarySearchTree;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,14 @@ public class BinarySearchTreeService {
         for (Integer number : numbers) {
             root = insert(root, number);
         }
+
+        String treeJson = convertTreeToJson(root);
+
+        BinarySearchTree treeEntity = new BinarySearchTree();
+        treeEntity.setInputNumbers(numbers);
+        treeEntity.setTreeStructure(treeJson);
+        repository.save(treeEntity);
+
         return root;
     }
 
@@ -31,5 +41,19 @@ public class BinarySearchTreeService {
             root.right = insert(root.right, value);
         }
         return root;
+    }
+
+    public List<BinarySearchTree> getAllTrees() {
+        return repository.findAll();
+    }
+
+    private String convertTreeToJson(TreeNode root) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(root);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
